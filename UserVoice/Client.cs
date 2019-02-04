@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Authenticators;
-using RestSharp.Extensions.MonoHttp;
 
 namespace UserVoice
 {
@@ -87,7 +86,7 @@ namespace UserVoice
                     result = JObject.Parse(response.Content);
                 } else {
                     result = new JObject();
-                    var values = HttpUtility.ParseQueryString(response.Content);
+                    var values = System.Web.HttpUtility.ParseQueryString(response.Content);
                     if (null != values.AllKeys) {
                         foreach (String k in values.AllKeys) {
                             if (null != k) {
@@ -121,7 +120,7 @@ namespace UserVoice
         public Client RequestToken(string callback = null) {
             var request = new RestRequest("/oauth/request_token", Method.POST);
             var response = consumer.Execute(request);
-            var result = HttpUtility.ParseQueryString(response.Content);
+            var result = System.Web.HttpUtility.ParseQueryString(response.Content);
 
             if (null == result || null == result["oauth_token"] || null == result["oauth_token_secret"]) {
                 throw new Unauthorized("Failed to get request token");
