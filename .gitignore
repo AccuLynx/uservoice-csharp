@@ -1,7 +1,7 @@
 TestResults
 *.csproj.user
-/bin
-/obj
+bin/
+obj/
 /packages
 *.nupkg
 *.xml
@@ -12,3 +12,6 @@ TestResults
 /config.yml
 
 *.suo
+
+# VS2015 project info folder
+**/.vs/*
